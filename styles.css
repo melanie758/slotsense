@@ -1,0 +1,1542 @@
+:root {
+  --header-bg: #3b5c0b;
+  /* Semi-transparent teal header background */
+  --card-bg: #ffffff;
+  /* Default white card background */
+  --dark-bg: #121212;
+  /* Very dark background for dark mode */
+  --dark-card: #1e1e1e;
+  /* Dark gray card background for dark mode */
+}
+
+body {
+  margin: 0;
+  /* Remove default margin */
+  font-family: 'Segoe UI', sans-serif;
+  /* Clean, modern font */
+  background-color: #f4f4f4;
+  /* Light gray page background */
+  color: #333;
+  /* Dark gray text color */
+  transition: background-color 0.5s ease, color 0.3s ease;
+  /* Smooth dark mode transition */
+  padding: 0 20px;
+  /* Horizontal padding for layout breathing room */
+  opacity: 0;
+  animation: fadeInBody .8s ease-out forwards;
+}
+
+@keyframes fadeInBody {
+  to {
+    opacity: 1;
+  }
+}
+
+body.dark {
+  background-color: var(--dark-bg);
+  /* Switch to dark background */
+  color: #eee;
+  /* Light text for dark mode */
+}
+
+body.dark .main-card {
+  background-color: var(--dark-card);
+}
+
+body.dark .lot-card,
+body.dark .lot-card-row {
+  /*background-color: var(--dark-card); */
+  background-color: rgba(5, 2, 2, 0.978);
+  /* Darken cards in dark mode */
+}
+
+body.dark .stat-box.total {
+  background-color: rgba(255, 255, 255, 0.322);
+  /*background-color: rgba(101, 201, 29, 0.809);*/
+  color: #ffffff;
+  /* Light gray */
+  /* Semi-transparent white box */
+}
+
+body.dark .stat-box.occupied {
+  background-color: rgba(255, 0, 0, 0.197);
+  /* Light red background for occupied */
+}
+
+body.dark .stat-box.available {
+  background-color: rgba(0, 128, 0, 0.15);
+  color: #2ecc71;
+  /* Bright green */
+  /* Light green background for available */
+}
+
+header {
+  position: fixed;
+  /* Stick to top of screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  /* Stay on top */
+  display: flex;
+  /* Horizontal layout */
+  justify-content: space-between;
+  /* Space between title and nav */
+  align-items: center;
+  /* Center vertically */
+  background-color: var(--header-bg);
+  /* Use header background */
+  color: white;
+  /* White text in header */
+  padding: 0.6rem 2rem;
+  /* Spacing around header content */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Soft shadow under header */
+  padding: 0.05rem 2rem;
+  /* Optional: tighter vertical padding */
+}
+
+header h1 {
+  cursor: pointer;
+  /* Clickable title (navigates home) */
+  font-size: 1.5rem;
+  /* Large title text */
+}
+
+nav {
+  display: flex;
+  /* Horizontal nav layout */
+  align-items: center;
+  gap: 1rem;
+  /* Space between nav items */
+  padding-right: 1rem;
+  /* Extra space on the right */
+  margin-right: 2rem;
+  /* Push nav leftwards for balance */
+}
+
+nav a {
+  color: white;
+  /* White nav links */
+  text-decoration: none;
+  /* No underlines */
+  font-size: 1rem;
+  /* Standard size */
+}
+
+nav a.active {
+  border-bottom: 2px solid white;
+  /* Underline active link */
+}
+
+#modeToggle {
+  background: none;
+  /* Transparent background */
+  border: none;
+  /* No border */
+  font-size: 1.3rem;
+  /* Larger icon size */
+  cursor: pointer;
+  /* Pointer cursor */
+  color: white;
+  /* White icon/text */
+}
+
+.main-card {
+  background-color: var(--card-bg);
+  /* White card background */
+  margin: 5rem auto 2rem auto;
+  /* Space from top header + center horizontally */
+  padding: 2rem;
+  /* Inner padding */
+  max-width: 1100px;
+  /* Limit width */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Soft shadow */
+}
+
+.section-title {
+  font-size: 30px;
+  text-align: center;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: #007bff;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  animation: underlineGrow 2s ease-out forwards;
+}
+
+@keyframes underlineGrow {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+
+  100% {
+    width: 120px;
+    opacity: 1;
+  }
+}
+
+.stats {
+  display: flex;
+  /* Horizontal layout */
+  justify-content: center;
+  /* Center boxes */
+  gap: 1rem;
+  /* Space between stat boxes */
+  margin-bottom: 2.1rem;
+  /* Space below stats */
+  margin-top: 1.5rem;
+}
+
+.stat-box {
+  flex: .25;
+  /* Equal width boxes */
+  padding: 2rem;
+  /* Inner padding */
+  border-radius: 10px;
+  /* Rounded corners */
+  text-align: center;
+  /* Center text */
+  font-weight: bold;
+  /* Bold text */
+  box-shadow: 0 4px 12px rgba(219, 255, 246, 0.303);
+  /* Subtle shadow */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  /* Light border */
+
+  font-size: 1.5rem;
+  /* Adjust font size */
+  color: #333;
+  /* Default text color */
+  font-family: 'Segoe UI', Arial, sans-serif;
+  /* Font family */
+  transition: all 0.3s ease;
+  /* Smooth transitions */
+
+}
+
+.stat-box.total {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #2c3e50;
+  /* Dark blue-gray */
+  /* Semi-transparent white */
+}
+
+.stat-box.occupied {
+  background-color: rgba(255, 0, 0, 0.15);
+  color: #c0392b;
+  /* Dark red */
+  /* Light red */
+}
+
+.stat-box.available {
+  background-color: rgba(0, 128, 0, 0.15);
+  color: #007400;
+  /* Dark green */
+  /* Light green */
+}
+
+#map {
+  height: 400px;
+  /* Map height */
+  width: 80%;
+  /* Full width */
+  margin-bottom: 2.5rem;
+  /* Space below map */
+  border-radius: 8px;
+  /* Rounded corners */
+  box-shadow: 0 2px 8px rgba(200, 255, 1, 0.711);
+  /* Subtle shadow */
+  z-index: 1;
+  /* Layer above other elements if needed */
+  margin: auto;
+}
+
+.section-title {
+  text-align: center;
+  /* Center section headings */
+}
+
+.lot-wrapper {
+  display: flex;
+  /* Flexible lot cards layout */
+  flex-wrap: wrap;
+  /* Wrap onto new lines */
+  gap: 1rem;
+  /* Space between cards */
+  justify-content: center;
+  /* Center cards */
+}
+
+/* Lot card styles (summary cards for parking lots) */
+.lot-card {
+  display: flex;
+  height: 120px;
+  /* Fixed height */
+  width: 280px;
+  /* Fixed width */
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: white;
+}
+
+.left-bar {
+  width: 6px;
+  /* Thin vertical bar */
+  height: 100%;
+  /* Full height */
+}
+
+.right-bar {
+  writing-mode: vertical-rl;
+  /* Vertical text */
+  transform: rotate(180deg);
+  /* Flip upside down */
+  font-weight: bold;
+  color: white;
+  font-size: 0.8rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  /* Narrow width */
+}
+
+.lot-card.critical .left-bar {
+  background-color: red;
+  /* Red for critical status */
+}
+
+.lot-card.critical .right-bar {
+  background-color: rgba(255, 0, 0, 0.2);
+  font-size: 0.8rem;
+  color: rgba(79, 1, 1, 0.642);
+  ;
+  /* Light red background */
+}
+
+.lot-card.high .left-bar {
+  background-color: orange;
+  /* Orange for high status */
+}
+
+.lot-card.high .right-bar {
+  background-color: rgba(255, 166, 0, 0.231);
+  font-size: 0.8rem;
+  color: rgba(79, 60, 1, 0.642);
+  /* Light orange */
+}
+
+.lot-card.low .left-bar {
+  background-color: green;
+  /* Green for low status */
+}
+
+.lot-card.low .right-bar {
+  background-color: rgba(0, 128, 0, 0.2);
+  font-size: 0.8rem;
+  color: rgba(24, 79, 1, 0.642);
+  /* Light green */
+}
+
+.lot-content {
+  flex: 1;
+  /* Fill remaining space */
+  padding: 0.75rem;
+  /* Inner padding */
+}
+
+.lot-content h3 {
+  margin: 0 0 0.4rem;
+  /* Space below heading */
+}
+
+.lot-content p {
+  margin: 0.2rem 0;
+  /* Small spacing */
+}
+
+.lot-content small {
+  font-size: 0.75rem;
+  /* Smaller text */
+  color: gray;
+  /* Gray text */
+}
+
+/* More list and row styles (for list view mode) */
+
+
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.filters button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #3b5c0b;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filters button:hover {
+  background-color: #4d7a0f;
+  transform: scale(1.05);
+}
+
+body.dark .filters button {
+  background-color: #2e4a0a;
+}
+
+/* Hide filter controls (for now?) */
+
+.lot-list {
+  display: flex;
+  flex-direction: column;
+  /* Stack vertically */
+  align-items: center;
+  gap: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 800px;
+  /* Limit width */
+  padding: 0 1rem;
+  /* Horizontal padding */
+}
+
+/* Hover and transition effects on lot cards */
+.lot-card {
+  display: flex;
+  width: 75%;
+  align-items: center;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.lot-card:hover {
+  transform: scale(1.01);
+  /* Slight zoom on hover */
+  z-index: 1;
+}
+
+.lot-card .left-bar {
+  width: 6px;
+  /* Slim vertical bar on left side of lot card */
+  height: 100%;
+  /* Full card height */
+}
+
+.lot-card .right-bar {
+  width: 55px;
+  /* Right status bar width */
+  height: 100%;
+  /* Full card height */
+  writing-mode: vertical-rl;
+  /* Vertical text orientation */
+  transform: rotate(180deg);
+  /* Flip text upright */
+  display: flex;
+  /* Center content vertically/horizontally */
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  /* Small text */
+  font-weight: bold;
+  color: white;
+  /* Text color */
+  border-radius: 4px;
+  /* Rounded corners */
+}
+
+.lot-card.low .left-bar {
+  background-color: green;
+  /* Low status: green left bar */
+}
+
+.lot-card.low .right-bar {
+  background-color: rgba(0, 128, 0, 0.2);
+  /* Low status: translucent green right bar */
+}
+
+.lot-card.high .left-bar {
+  background-color: orange;
+  /* High status: orange left bar */
+}
+
+.lot-card.high .right-bar {
+  background-color: rgba(255, 165, 0, 0.2);
+  /* High status: translucent orange right bar */
+}
+
+.lot-card.critical .left-bar {
+  background-color: red;
+  /* Critical status: red left bar */
+}
+
+.lot-card.critical .right-bar {
+  background-color: rgba(255, 0, 0, 0.2);
+  /* Critical status: translucent red right bar */
+}
+
+.lot-content {
+  flex: 1;
+  /* Expand to fill remaining space */
+  padding: 0.75rem 1rem;
+  /* Inner spacing */
+}
+
+.lot-content h3 {
+  margin: 0 0 0.4rem;
+  /* Bottom margin */
+  font-size: 1.05rem;
+  /* Heading size */
+}
+
+.lot-content p {
+  margin: 0.2rem 0;
+  /* Small top/bottom margin */
+  font-size: 0.9rem;
+  /* Paragraph text size */
+}
+
+.lot-content .distance {
+  font-size: 0.8rem;
+  /* Small text */
+  color: #777;
+  /* Gray color */
+}
+
+.extra-info {
+  display: none;
+  /* Hidden by default */
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+.lot-card.expanded .extra-info {
+  display: block;
+  /* Show when expanded */
+}
+
+.lot-list {
+  display: flex;
+  /* Column list layout */
+  flex-direction: column;
+  gap: 1rem;
+  /* Space between cards */
+  padding: 1rem 2rem;
+  /* Outer spacing */
+  max-width: 900px;
+  /* Container max width */
+  margin: 0 auto;
+  /* Center horizontally */
+}
+
+.lot-card-row {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  /* Row layout */
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  /* Inner spacing */
+  border-radius: 8px;
+  /* Rounded corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  /* Subtle shadow */
+  background-color: white;
+  gap: 1rem;
+  min-height: 70px;
+  /* Minimum height */
+}
+
+.lot-card-row h3 {
+  margin: 0;
+  /* Remove margin */
+  font-size: 1.05rem;
+}
+
+.lot-card-row p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.extra-info {
+  display: none;
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+.lot-card-row.expanded .extra-info {
+  display: block;
+  /* Show when expanded */
+}
+
+.right-bar {
+  width: 55px;
+  height: 100%;
+  writing-mode: vertical-rl;
+  text-align: center;
+  transform: rotate(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.distance {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Adjust camera grid with equal padding on both sides */
+.camera-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* 3 columns */
+  gap: 1.5rem;
+  /* Space between cards */
+  margin-top: 4rem;
+  padding: 2rem 20px 2rem 100px;
+  /* Top/Bottom + Side padding */
+  max-width: 100%;
+  box-sizing: border-box;
+
+}
+
+/* Adjust camera card size to avoid overflow on hover */
+.camera-card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  width: 100%;
+  max-width: 360px;
+  /* Consistent size */
+}
+
+.camera-card:hover {
+  transform: scale(1.02);
+  z-index: 1;
+  /* Bring to front on hover */
+}
+
+/*.camera-placeholder {
+  background-color: #d6e8d4;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #155e2f;
+}*/
+
+.camera-placeholder {
+  background-color: #d6e8d4;
+  width: 100%;
+  height: 200px;
+  /* Or whatever fixed height fits your cards */
+  object-fit: cover;
+  /* Makes sure video fills area nicely */
+  border-radius: 8px;
+  /* Optional rounded corners */
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-weight: bold;
+
+  color: #155e2f;
+}
+
+
+.camera-label {
+  padding: 0.75rem;
+  text-align: center;
+  font-size: 1rem;
+  background-color: #eef6ee;
+  color: #155e2f;
+}
+
+/* Dark mode for live page */
+body.dark .camera-card {
+  background-color: #2c3a4b;
+  /* Dark background */
+}
+
+body.dark .camera-placeholder {
+  background-color: #334155;
+  /* Dark placeholder */
+  color: #d1fae5;
+  /* Light text */
+}
+
+body.dark .camera-label {
+  background-color: #1e293b;
+  /* Dark label bg */
+  color: #d1fae5;
+  /* Light text */
+}
+
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #2c3e50;
+  color: white;
+}
+
+.header-branding {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.school-logo {
+  height: 50px;
+  /* Adjust based on your logo */
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.school-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Dark mode header styles */
+body.dark header {
+  background-color: #1a252f;
+}
+
+/* Adjust h1 margin when logo is present */
+.header-branding h1 {
+  margin: 0;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+/* Navigation styles (keep your existing nav styles) */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+
+/* ======================== */
+/* Refresh Button Styles */
+/* ======================== */
+
+.refresh-container {
+  display: flex;
+  justify-content: center;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.8rem 1.5rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.refresh-btn:hover {
+  background-color: #1a5276;
+  transform: translateY(-2px);
+}
+
+.refresh-btn:active {
+  transform: translateY(0);
+}
+
+.refresh-icon {
+  transition: transform 0.5s ease;
+}
+
+.refresh-btn:hover .refresh-icon {
+  transform: rotate(360deg);
+}
+
+/* Dark mode styles */
+body.dark .refresh-btn {
+  background-color: #34495e;
+}
+
+body.dark .refresh-btn:hover {
+  background-color: #2874a6;
+}
+
+/* ======================== */
+/* Logo Link Styles */
+/* ======================== */
+
+.logo-link {
+  display: inline-block;
+  /* Makes the anchor tag properly contain the image */
+  transition: transform 0.3s ease;
+  height: 50px;
+  /* Should match your logo height */
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+/* Remove default anchor styles */
+.logo-link,
+.logo-link:hover,
+.logo-link:visited {
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  outline: none;
+}
+
+/* If you want the logo to have a subtle "click" effect */
+.logo-link:active {
+  transform: scale(0.98);
+}
+
+
+.camera-feed {
+  width: 100%;
+  height: 200px;
+  background-color: #000;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+  /* Match your card's border radius */
+}
+
+/* Dark mode video styling */
+body.dark .camera-feed {
+  border: 1px solid #444;
+}
+
+body.dark table th {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+body.dark table td {
+  border-color: #444;
+}
+
+body.dark .stat-box {
+  border-color: #444;
+}
+
+body.dark .status-normal {
+  background-color: #244d3d;
+  color: #d4edda;
+}
+
+body.dark .status-high {
+  background-color: #5b4b1e;
+  color: #fff3cd;
+}
+
+body.dark .status-critical {
+  background-color: #6a1a21;
+  color: #f8d7da;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 5px solid #dddddd87;
+}
+
+th {
+  background-color: #fafafa;
+}
+
+.status-normal {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 5px 10px;
+  border-radius: 18px;
+}
+
+.status-high {
+  background-color: #fff3cd;
+  color: #856404;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.status-critical {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
+.section-title {
+  margin-top: 30px;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+  margin-bottom: 70px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  min-width: 100px;
+
+}
+
+.stat-label {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.stat-number {
+  font-size: 2.1rem;
+  font-weight: bold;
+}
+
+
+.lot-content {
+  position: relative;
+  padding-bottom: 2.5rem;
+}
+
+.lot-redirect {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.redirect-link {
+  background-color: #007bff;
+  color: white;
+  padding: 4px 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  transition: background-color 0.3s ease;
+}
+
+.redirect-link:hover {
+  background-color: #0056b3;
+}
+
+
+/*======================================================================================================================================================*/
+
+
+/* ======================== */
+/* Settings Page Styles */
+/* ======================== */
+
+.settings-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.settings-category {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body.dark .settings-category {
+  background-color: var(--dark-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+body.dark .setting-row {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.setting-row:last-child {
+  border-bottom: none;
+}
+
+.setting-label {
+  flex: 1;
+  margin-right: 1.5rem;
+}
+
+.setting-label strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.setting-description {
+  display: block;
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: normal;
+}
+
+body.dark .setting-description {
+  color: #aaa;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked+.slider {
+  background-color: #3b5c0b;
+}
+
+input:checked+.slider:before {
+  transform: translateX(26px);
+}
+
+/* Select Dropdowns */
+.settings-select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: white;
+  min-width: 150px;
+}
+
+body.dark .settings-select {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #eee;
+}
+
+/* Range Slider */
+.range-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 200px;
+}
+
+.slider-range {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: #ddd;
+  outline: none;
+}
+
+body.dark .slider-range {
+  background: #444;
+}
+
+.slider-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #3b5c0b;
+  cursor: pointer;
+}
+
+/* Buttons */
+.settings-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #3b5c0b;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settings-button:hover {
+  background-color: #4d7a0f;
+  transform: translateY(-1px);
+}
+
+.settings-button.secondary {
+  background-color: #6c757d;
+}
+
+.settings-button.secondary:hover {
+  background-color: #5a6268;
+}
+
+.settings-button.logout {
+  background-color: #dc3545;
+}
+
+.settings-button.logout:hover {
+  background-color: #c82333;
+}
+
+.setting-row.actions {
+  justify-content: flex-start;
+  gap: 1rem;
+  padding-top: 1.5rem;
+}
+
+/* App Info Grid */
+.app-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-item {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.info-label {
+  font-weight: bold;
+}
+
+.info-value {
+  color: #555;
+}
+
+body.dark .info-value {
+  color: #bbb;
+}
+
+.status-active {
+  color: #28a745;
+  font-weight: bold;
+}
+
+body.dark .status-active {
+  color: #4ade80;
+}
+
+/* Legal Section */
+.legal-section {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+body.dark .legal-section {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  color: #aaa;
+}
+
+.legal-section a {
+  color: #3b5c0b;
+  text-decoration: none;
+}
+
+body.dark .legal-section a {
+  color: #8bc34a;
+}
+
+.legal-section a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  margin-top: 0.5rem;
+}
+
+
+/*======================================================================================================================================================*/
+/* ======================== */
+/* About Page Styles */
+/* ======================== */
+
+.about-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-section {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.about-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.about-text {
+  flex: 2;
+}
+
+.illustration {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.feature-card {
+  background-color: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+body.dark .feature-card {
+  background-color: var(--dark-card);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+  color: var(--primary-color);
+  margin-top: 0;
+}
+
+.feature-card ul {
+  padding-left: 1.2rem;
+}
+
+.feature-card li {
+  margin-bottom: 0.5rem;
+}
+
+.team-section {
+  margin: 4rem 0;
+}
+
+.team-members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.team-member {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+body.dark .team-member {
+  background-color: var(--dark-card);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.member-avatar {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.team-member h4 {
+  margin: 0.5rem 0;
+  color: var(--primary-color);
+}
+
+.credits-section {
+  margin: 4rem 0;
+}
+
+.tech-logos {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.tech-logo {
+  text-align: center;
+  max-width: 150px;
+}
+
+.tech-logo img {
+  width: 100%;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.about-footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+body.dark .about-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.contact-info h4 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.copyright {
+  text-align: right;
+  color: #666;
+}
+
+body.dark .copyright {
+  color: #aaa;
+}
+
+/* ======================== */
+/* Accent Color Variables */
+/* ======================== */
+
+:root {
+  --primary-color: var(--blue);
+  /* Your existing blue color */
+  --blue: #2c3e50;
+  --green: #27642a;
+  --purple: #601091;
+  --pink: #ff37fc;
+  --royal: #1717e4;
+
+}
+
+/* Apply accent colors to key elements */
+header,
+.filters button,
+.settings-button:not(.logout),
+.settings-button:not(.secondary) {
+  background-color: var(--primary-color);
+}
+
+.feature-card h3,
+.team-member h4,
+.contact-info h4,
+.settings-category h3 {
+  color: var(--primary-color);
+}
+
+/* Dark mode adjustments for accent colors */
+body.dark header,
+body.dark .filters button,
+body.dark .settings-button:not(.logout) {
+  background-color: color-mix(in srgb, var(--primary-color) 80%, black);
+}
+
+/* =======================================================================v=========================================================*/
+
+/* Preferred Lot Visual Indicators */
+.lot-card.preferred {
+  position: relative;
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+body.dark .lot-card.preferred {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.lot-card.preferred::before {
+  content: "★ Preferred";
+  position: absolute;
+  top: 14px;
+  right: 78px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 2;
+}
+
+/* Ensure the badge doesn't overlap with status bar */
+.lot-card.preferred .right-bar {
+  margin-right: 15px;
+}
+
+/*====================================================================================================*/
+
+
+/*  location controls */
+
+
+#location-controls {
+  position: absolute;
+  top: 10px;
+  right: 50px;
+  z-index: 1000;
+}
+
+#toggleLocationBtn {
+  background: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+body.dark #toggleLocationBtn {
+  background: #333;
+  color: white;
+}
+
+
+/*====================================================================================================*/
+
+
+/* Add to your styles.css */
+.user-location-marker {
+  font-size: 24px;
+  text-align: center;
+}
+
+.parking-marker {
+  font-size: 24px;
+  text-align: center;
+}
+
+.parking-marker.critical {
+  color: #dc3545;
+}
+
+.parking-marker.high {
+  color: #fd7e14;
+}
+
+.parking-marker.low {
+  color: #28a745;
+}
+
+.lot-card.selected {
+  box-shadow: 0 0 0 3px var(--primary-color);
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+
+#map {
+  height: 500px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.leaflet-routing-container {
+  display: none;
+  /* Hide the routing instructions panel */
+}

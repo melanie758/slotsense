@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SlotSense - Home</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+  <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header-branding">
+      <a href="index.html" class="logo-link">
+        <img src="images/school-logo.png" alt="School Logo" class="school-logo">
+      </a>
+      <h1 onclick="window.location.href='index.html'">SlotSense Smart Parking System</h1>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="live.html">Live Cameras</a>
+      <a href="lot.html">Parking Lots</a>
+      <a href="about.html">About</a>
+      <a href="settings.html">Settings</a>
+      <div class="mode-toggle-wrapper">
+        <button id="modeToggle" title="Toggle Dark Mode">
+          <span id="moonIcon">🌙</span>
+          <span id="sunIcon" style="display: none;">☀️</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-card">
+    <div id="map">
+      <button id="locateBtn" title="Locate Me">📍</button>
+    </div>
+    <h2 class="section-title">Nearby Parking Lots</h2>
+
+    <section class="lot-wrapper">
+      <div class="lot-card low dorm1">
+        <div class="left-bar"></div>
+        <div class="lot-content">
+          <h3>Dormitory 1</h3>
+          <p>Available: 2/30</p>
+          <small>0.3 miles away</small>
+          <div class="lot-redirect">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=23.89399,121.53557" target="_blank"
+              class="redirect-link">Directions</a>
+            <a href="camera.html?label=NDHU+Dormitory+I&videoSrc=file%3A%2F%2F%2FUsers%2Fspence%2FDesktop%2Fwebsite-slotsense%2F%28%25E6%2593%25B7%25E9%259B%25B2%25E8%258E%258A%29Dormitoty_I.mp4&status=Available"
+              target="_blank" class="redirect-link">Camera View</a>
+          </div>
+        </div>
+        <div class="right-bar">LOW</div>
+      </div>
+
+      <div class="lot-card low admin">
+        <div class="left-bar"></div>
+        <div class="lot-content">
+          <h3>Administration</h3>
+          <p>Available: 5/40</p>
+          <small>0.4 miles away</small>
+          <div class="lot-redirect">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=23.89426,121.54274" target="_blank"
+              class="redirect-link">Directions</a>
+            <a href="camera.html?label=Administration+Building&videoSrc=file%3A%2F%2F%2FUsers%2Fspence%2FDesktop%2Fwebsite-slotsense%2F%28%25E8%25A1%258C%25E6%2594%25BF%25E5%25A4%25A7%25E6%25A8%2593%29Administration%2520Building.mp4&status=Full"
+              target="_blank" class="redirect-link">Camera View</a>
+            <a href="free.html?label=Administration+Building&videoSrc=file%3A%2F%2F%2FUsers%2Fspence%2FDesktop%2Fwebsite-slotsense%2F%28%25E8%25A1%258C%25E6%2594%25BF%25E5%25A4%25A7%25E6%25A8%2593%29Administration%2520Building.mp4&status=Available"
+              target="_blank" class="redirect-link">Free Slot</a>
+
+          </div>
+        </div>
+        <div class="right-bar">LOW</div>
+      </div>
+
+      <div class="lot-card critical csie">
+        <div class="left-bar"></div>
+        <div class="lot-content">
+          <h3>CSIE Parking Lot</h3>
+          <p>Available: 25/30</p>
+          <small>0.6 miles away</small>
+          <div class="lot-redirect">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=23.89892,121.54332" target="_blank"
+              class="redirect-link">Directions</a>
+            <a href="camera.html?label=CSIE%20Parking%202&videoSrc=%2FUsers%2Fspence%2FDesktop%2Fwebsite-slotsense%2F%28%E7%90%86%E5%B7%A5%E4%BA%8C%E9%A4%A8%29Science%20and%20Engineering%20Building%20II.mp4&status=Available"
+              target="_blank" class="redirect-link">Camera View</a>
+          </div>
+        </div>
+        <div class="right-bar">CRITICAL</div>
+      </div>
+
+      <div class="lot-card high dorm2">
+        <div class="left-bar"></div>
+        <div class="lot-content">
+          <h3>Dormitory 2</h3>
+          <p>Available: 18/50</p>
+          <small>0.2 miles away</small>
+          <div class="lot-redirect">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=23.89563,121.53394" target="_blank"
+              class="redirect-link">Directions</a>
+            <a href="camera.html?label=NDHU+Dormitory&videoSrc=file%3A%2F%2F%2FUsers%2Fspence%2FDesktop%2FLennox%2Fcar-parking-finder%2Fdata%2Fsource%2Ftest-feed.mp4&status=Available"
+              target="_blank" class="redirect-link">Camera View</a>
+          </div>
+        </div>
+        <div class="right-bar">HIGH</div>
+      </div>
+
+      <div class="lot-card critical eastside">
+        <div class="left-bar"></div>
+        <div class="lot-content">
+          <h3>Eastside Community Centre</h3>
+          <p>Available: 14/15</p>
+          <small>0.9 miles away</small>
+          <div class="lot-redirect">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=23.90224,121.54748" target="_blank"
+              class="redirect-link">Directions</a>
+            <a href="live.html#dormitory1" target="_blank" class="redirect-link">Camera View</a>
+          </div>
+        </div>
+        <div class="right-bar">CRITICAL</div>
+      </div>
+
+      <div class="lot-card high zhixue">
+        <div class="left-bar"></div>
+        <div class="lot-content">
+          <h3>Zhixue Entrance</h3>
+          <p>Available: 8/15</p>
+          <small>0.5 miles away</small>
+          <div class="lot-redirect">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=23.90403,121.53657" target="_blank"
+              class="redirect-link">Directions</a>
+            <a href="live.html#dormitory1" target="_blank" class="redirect-link">Camera View</a>
+          </div>
+        </div>
+        <div class="right-bar">HIGH</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Apply accent color
+      const savedColor = localStorage.getItem('themeColor') || 'blue';
+      document.documentElement.style.setProperty('--primary-color', `var(--${savedColor})`);
+
+      // Apply dark mode
+      const darkMode = localStorage.getItem('darkMode') === 'true';
+      document.body.classList.toggle('dark', darkMode);
+
+      // Apply parking preferences
+      applyParkingPreferences();
+
+      // Initialize map with location tracking
+      if (document.getElementById('map')) {
+        initMapWithRouting();
+      }
+
+      // Dark mode toggle functionality
+      const toggle = document.getElementById('modeToggle');
+      const moonIcon = document.getElementById('moonIcon');
+      const sunIcon = document.getElementById('sunIcon');
+
+      function updateDarkMode(isDark) {
+        if (isDark) {
+          document.body.classList.add('dark');
+          if (moonIcon) moonIcon.style.display = 'none';
+          if (sunIcon) sunIcon.style.display = 'inline';
+        } else {
+          document.body.classList.remove('dark');
+          if (moonIcon) moonIcon.style.display = 'inline';
+          if (sunIcon) sunIcon.style.display = 'none';
+        }
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          const isDark = !document.body.classList.contains('dark');
+          document.body.classList.toggle('dark');
+          localStorage.setItem('darkMode', isDark);
+          updateDarkMode(isDark);
+        });
+      }
+    });
+
+    function applyParkingPreferences() {
+      const preferredLotId = localStorage.getItem('preferredLot') || 'any';
+      const autoOpenEnabled = localStorage.getItem('autoOpen') === 'enabled';
+      const distanceUnit = localStorage.getItem('distanceUnit') || 'miles';
+
+      if (preferredLotId !== 'any') {
+        document.querySelectorAll('.lot-card').forEach(card => {
+          if (card.classList.contains(preferredLotId)) {
+            card.classList.add('preferred');
+          }
+        });
+      }
+
+      if (autoOpenEnabled) {
+        const preferredLot = document.querySelector(`.lot-card.${preferredLotId}`);
+        const anyAvailableLot = document.querySelector('.lot-card.low, .lot-card.high');
+        const lotToOpen = preferredLotId !== 'any' && preferredLot ? preferredLot : anyAvailableLot;
+
+        if (lotToOpen) {
+          lotToOpen.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          lotToOpen.style.boxShadow = `0 0 0 2px var(--primary-color)`;
+          setTimeout(() => {
+            lotToOpen.style.boxShadow = '';
+          }, 2000);
+        }
+      }
+
+      if (distanceUnit === 'kilometers') {
+        document.querySelectorAll('.distance').forEach(el => {
+          const miles = parseFloat(el.textContent);
+          const km = (miles * 1.60934).toFixed(1);
+          el.textContent = `${km} km away`;
+        });
+      }
+    }
+
+    function initMapWithRouting() {
+      const map = L.map('map').setView([23.89984, 121.53781], 15.2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+      let userLocationMarker = null;
+      let userLocationCircle = null;
+      let routingControl = null;
+
+      const lots = [
+        { name: 'Dormitory 1', status: 'low', coords: [23.893910605816526, 121.53556337004868], element: document.querySelector('.lot-card.dorm1') },
+        { name: 'Administration', status: 'low', coords: [23.89426, 121.54274], element: document.querySelector('.lot-card.admin') },
+        { name: 'Dormitory 2', status: 'low', coords: [23.89563, 121.53394], element: document.querySelector('.lot-card.dorm2') },
+        { name: 'CSIE Parking Lot', status: 'critical', coords: [23.89892, 121.54332], element: document.querySelector('.lot-card.csie') },
+        { name: 'Jishui Entrance', status: 'high', coords: [23.90403, 121.53657], element: document.querySelector('.lot-card.zhixue') },
+        { name: 'Eastside Community Centre', status: 'critical', coords: [23.90224, 121.54748], element: document.querySelector('.lot-card.eastside') }
+      ];
+
+      routingControl = L.Routing.control({
+        waypoints: [],
+        routeWhileDragging: true,
+        showAlternatives: false,
+        addWaypoints: false,
+        lineOptions: { styles: [{ color: '#136AEC', opacity: 0.6, weight: 5 }] },
+        show: false
+      }).addTo(map);
+
+      function onLocationFound(e) {
+        const radius = e.accuracy / 2;
+
+        if (userLocationMarker) {
+          userLocationMarker.setLatLng(e.latlng);
+          userLocationCircle.setLatLng(e.latlng);
+          userLocationCircle.setRadius(radius);
+        } else {
+          userLocationMarker = L.marker(e.latlng, {
+            icon: L.divIcon({
+              className: 'user-location-marker',
+              html: '📍',
+              iconSize: [50, 50]
+            })
+          }).addTo(map).bindPopup("You are here").openPopup();
+
+          userLocationCircle = L.circle(e.latlng, {
+            color: '#EC273B',
+            fillColor: '#276AEC',
+            fillOpacity: 0.25,
+            radius: radius
+          }).addTo(map);
+        }
+      }
+
+      function onLocationError(e) {
+        console.log("Geolocation error:", e.message);
+        alert("Could not determine your location. Please ensure location services are enabled.");
+      }
+
+      function showRouteTo(destinationCoords) {
+        if (!userLocationMarker) {
+          alert("Please wait while we determine your location...");
+          return;
+        }
+
+        routingControl.setWaypoints([
+          L.latLng(userLocationMarker.getLatLng()),
+          L.latLng(destinationCoords)
+        ]);
+
+        map.fitBounds([
+          userLocationMarker.getLatLng(),
+          L.latLng(destinationCoords)
+        ]);
+      }
+
+      lots.forEach(lot => {
+        const marker = L.marker(lot.coords, {
+          icon: L.divIcon({
+            className: `parking-marker ${lot.status}`,
+            html: '🅿️',
+            iconSize: [50, 50]
+          })
+        }).addTo(map).bindPopup(`<strong>${lot.name}</strong><br>Status: ${lot.status.toUpperCase()}`);
+
+        marker.on('click', function () {
+          showRouteTo(lot.coords);
+          document.querySelectorAll('.lot-card').forEach(c => c.classList.remove('selected'));
+          if (lot.element) lot.element.classList.add('selected');
+        });
+
+        if (lot.element) {
+          lot.element.addEventListener('click', function () {
+            showRouteTo(lot.coords);
+            document.querySelectorAll('.lot-card').forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+          });
+        }
+      });
+
+      document.getElementById('locateBtn')?.addEventListener('click', function () {
+        map.locate({ setView: true, maxZoom: 16 });
+      });
+
+      map.on('locationfound', onLocationFound);
+      map.on('locationerror', onLocationError);
+      map.locate({ watch: true, setView: false, maxZoom: 216, enableHighAccuracy: true });
+    }
+  </script>
+  <script src="common.js"></script>
+</body>
+
+</html>

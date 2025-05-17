@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - SlotSense</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header>
+        <div class="header-branding">
+            <a href="index.html" class="logo-link">
+                <img src="images/school-logo.png" alt="School Logo" class="school-logo">
+            </a>
+            <h1 onclick="window.location.href='index.html'">SlotSense Smart Parking System</h1>
+        </div>
+        <nav>
+            <a href="index.html">Nearby (Map)</a>
+            <a href="live.html">Live Cameras</a>
+            <a href="lot.html">Parking Lots</a>
+            <a href="about.html" class="active">About</a>
+            <a href="settings.html">Settings</a>
+
+            <div class="mode-toggle-wrapper">
+                <button id="modeToggle" title="Toggle Dark Mode">
+                    <span id="moonIcon">🌙</span>
+                    <span id="sunIcon" style="display: none;">☀️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-card">
+        <h2 class="section-title">About Us</h2>
+
+        <div class="about-content">
+            <div class="about-section">
+                <div class="about-image">
+                    <img src="images/about-image.png" alt="Parking System Illustration" class="illustration">
+                </div>
+                <div class="about-text">
+                    <p><strong>SlotSense</strong> is an innovative smart parking management system that helps drivers
+                        find available parking spaces faster and easier using real-time camera feeds, interactive maps,
+                        and live status updates.</p>
+                    <p>Our mission is to reduce parking frustration and save time for students, faculty, and visitors at
+                        NDHU.</p>
+                </div>
+            </div>
+
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">📋 How It Works</div>
+                    <h3>Welp????</h3>
+                    <ul>
+                        <li>AI-powered cameras monitor parking lots in real-time</li>
+                        <li>Available spaces are detected and displayed instantly</li>
+                        <li>Interactive map guides you to available lots</li>
+                        <li>Get notifications when spaces become available</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🪄Key Features✨</div>
+                    <h3>Welp????</h3>
+                    <ul>
+                        <li>Real-time parking availability</li>
+                        <li>Live camera feeds of parking areas</li>
+                        <li>Interactive campus map navigation</li>
+                        <li>Dark/light mode for any preference</li>
+                        <li>Customizable parking notifications</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="team-section">
+                <h3>Our Team</h3>
+                <div class="team-members">
+                    <div class="team-member">
+                        <div class="member-avatar">👨🏽‍💻</div>
+                        <h4>Lennox Spence</h4>
+                        <p>Lead Something</p>
+                        <p>411021330</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">🧑🏾‍💻</div>
+                        <h4>Shemar Leacock</h4>
+                        <p>Something </p>
+                        <p>411021371</p>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">👩🏽‍💻</div>
+                        <h4>Melanie Meidor</h4>
+                        <p>Something</p>
+                        <p>411021318</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="credits-section">
+                <h3>Technology Partners</h3>
+                <div class="tech-logos">
+                    <div class="tech-logo">
+                        <img src="images/roboflow-logo.png" alt="Roboflow">
+                        <p>Computer Vision</p>
+                    </div>
+                    <div class="tech-logo">
+                        <img src="images/leaflet-logo.png" alt="Leaflet">
+                        <p>Mapping</p>
+                    </div>
+                    <div class="tech-logo">
+                        <img src="images/school-logo.png" alt="NDHU">
+                        <p>University Partner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="about-footer">
+            <div class="contact-info">
+                <h4>Contact Us</h4>
+                <p>For questions or feedback:</p>
+                <p><a href="mailto:slotsensehelp@gmail.com">slotsense@help.com</a></p>
+                <p>+886 9 101 1176</p>
+            </div>
+            <div class="copyright">
+                <p>© 2025 SlotSense Smart Parking System</p>
+                <p>National Dong Hwa University</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Dark Mode Toggle (consistent with other pages)
+        const darkModeToggle = document.getElementById('modeToggle');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+
+        // Initialize from localStorage or system preference
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let darkMode = localStorage.getItem('darkMode');
+
+        if (darkMode === null) {
+            darkMode = systemPrefersDark;
+        } else {
+            darkMode = darkMode === 'true';
+        }
+
+        updateDarkMode(darkMode);
+
+        // Toggle dark mode
+        darkModeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            updateDarkMode(darkMode);
+            localStorage.setItem('darkMode', darkMode);
+        });
+
+        function updateDarkMode(isDark) {
+            document.body.classList.toggle('dark', isDark);
+            moonIcon.style.display = isDark ? 'none' : 'inline';
+            sunIcon.style.display = isDark ? 'inline' : 'none';
+        }
+
+        // Apply accent color from settings
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedColor = localStorage.getItem('themeColor') || 'blue';
+            document.documentElement.style.setProperty('--primary-color', `var(--${savedColor})`);
+        });
+    </script>
+</body>
+
+</html>

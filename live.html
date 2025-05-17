@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live Cameras - SlotSense</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header>
+    <div class="header-branding">
+      <a href="index.html" class="logo-link">
+        <img src="images/school-logo.png" alt="School Logo" class="school-logo">
+      </a>
+      <h1 onclick="window.location.href='index.html'">SlotSense Smart Parking System</h1>
+    </div>
+    <nav>
+      <a href="index.html">Nearby (Map)</a>
+      <a href="live.html" class="active">Live Cameras</a>
+      <a href="lot.html">Parking Lots</a>
+      <a href="about.html">About</a>
+      <a href="settings.html">Settings</a>
+
+
+      <div class="mode-toggle-wrapper">
+        <div class="mode-toggle-wrapper">
+          <button id="modeToggle" title="Toggle Dark Mode">
+            <span id="moonIcon">🌙</span>
+            <span id="sunIcon" style="display: none;">☀️</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="background-card">
+      <h2 class="section-title">Live Camera Feed</h2>
+
+
+      <div class="camera-grid" id="cameraGrid">
+        <!-- Camera Card 1 -->
+        <div class="camera-card full">
+          <video class="camera-placeholder"
+            src="/Users/spence/Desktop/Lennox/car-parking-finder/data/source/test-feed.mp4" autoplay loop muted
+            playsinline width="100%" height="100%"></video>
+          <div class="camera-label">NDHU Dormitory</div>
+        </div>
+
+
+        <!-- Camera Card 2 -->
+        <div id="csie2" class="camera-card available">
+          <video class="camera-placeholder"
+            src="/Users/spence/Desktop/website-slotsense/(理工二館)Science and Engineering Building II.mp4" autoplay loop
+            muted playsinline width="100%" height="100%"></video>
+          <div class="camera-label">CSIE Parking</div>
+        </div>
+
+        <!-- Camera Card 3 -->
+        <div class="camera-card available">
+          <div class="camera-placeholder">Camera Placeholder</div>
+          <div class="camera-label">Library Parking</div>
+        </div>
+
+        <!-- Camera Card 4 -->
+        <div class="camera-card full">
+          <iframe class="camera-placeholder"
+            src="https://www.youtube.com/embed/wJydkf3rirs?autoplay=1&mute=1&loop=1&playlist=wJydkf3rirs"
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen width="100%" height="100%">
+          </iframe>
+          <div class="camera-label">CSIE Building 2</div>
+        </div>
+
+
+        <!-- Camera Card 5 -->
+        <div class="camera-card available">
+          <video class="camera-placeholder" src="/Users/spence/Desktop/website-slotsense/(擷雲莊)Dormitoty_I.mp4" autoplay
+            loop muted playsinline width="100%" height="100%"></video>
+          <div class="camera-label">NDHU Dormitory I</div>
+        </div>
+
+        <!-- Camera Card 6 -->
+        <div class="camera-card full">
+          <video class="camera-placeholder"
+            src="/Users/spence/Desktop/website-slotsense/(行政大樓)Administration Building.mp4" autoplay loop muted
+            playsinline width="100%" height="100%"></video>
+          <div class="camera-label">Administration Building</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <div class="filters">
+    <button onclick="filterCameras('all')">All</button>
+    <button onclick="filterCameras('available')">Available</button>
+    <button onclick="filterCameras('full')">Full</button>
+
+  </div>
+
+
+
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    function filterCameras(type) {
+      const cards = document.querySelectorAll('.camera-card');
+      cards.forEach(card => {
+        if (type === 'all') {
+          card.style.display = '';
+        } else if (card.classList.contains(type)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+    // Make camera cards clickable and pass camera info via URL params
+    document.querySelectorAll('.camera-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const label = card.querySelector('.camera-label').textContent;
+        const videoElement = card.querySelector('video, iframe');
+        const status = card.classList.contains('available') ? 'Available' : 'Full';
+
+        const videoSrc = videoElement ? videoElement.src : 'none';
+
+        const url = new URL('camera.html', window.location.href);
+        url.searchParams.set('label', label);
+        url.searchParams.set('videoSrc', videoSrc);
+        url.searchParams.set('status', status);
+
+        window.location.href = url.toString();
+      });
+    });
+
+
+  </script>
+
+  <div class="refresh-container">
+    <button id="refreshButton" class="refresh-btn">
+      <span class="refresh-icon">🔄</span> Refresh Cameras
+    </button>
+  </div>
+
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    function filterCameras(type) {
+      const cards = document.querySelectorAll('.camera-card');
+      cards.forEach(card => {
+        if (type === 'all') {
+          card.style.display = '';
+        } else if (card.classList.contains(type)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+
+    document.getElementById('refreshButton').addEventListener('click', function () {
+
+      location.reload(); // Simple page reload
+
+    });
+
+    // Apply accent color from settings
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedColor = localStorage.getItem('themeColor') || 'blue';
+      document.documentElement.style.setProperty('--primary-color', `var(--${savedColor})`);
+    });
+  </script>
+
+  <script src="common.js"></script>
+</body>
+
+</html>

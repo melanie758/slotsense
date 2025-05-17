@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Camera View - SlotSense</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            padding: 0 20px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+
+
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .title-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+
+        }
+
+        .status-available {
+            background-color: #28a745;
+        }
+
+        .status-full {
+            background-color: #dc3545;
+        }
+
+        #videoContainer {
+            margin-top: 20px;
+        }
+
+        video,
+        iframe {
+            width: 100%;
+            max-height: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Dark mode styles */
+        body.dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark .back-btn {
+            background-color: #1e88e5;
+        }
+
+        /* Dark mode toggle */
+        .mode-toggle-wrapper {
+            position: absolute;
+            right: 0;
+        }
+
+        #modeToggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <a href="live.html" class="back-btn">⬅ Back</a>
+
+            <div class="title-group">
+                <h1 id="cameraTitle" style="font-size: 25px;"></h1>
+                <span id="statusBadge"></span>
+            </div>
+
+            <div class="mode-toggle-wrapper">
+                <button id="modeToggle" title="Toggle Dark Mode">
+                    <span id="moonIcon">🌙</span>
+                    <span id="sunIcon" style="display: none;">☀️</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div id="videoContainer"></div>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const label = params.get('label');
+        const videoSrc = params.get('videoSrc');
+        const status = params.get('status');
+
+        document.getElementById('cameraTitle').textContent = label;
+
+        const statusBadge = document.getElementById('statusBadge');
+        if (status === 'Available') {
+            statusBadge.textContent = 'Available';
+            statusBadge.className = 'status-badge status-available';
+        } else {
+            statusBadge.textContent = 'Full';
+            statusBadge.className = 'status-badge status-full';
+        }
+
+        const container = document.getElementById('videoContainer');
+
+        if (videoSrc === 'none') {
+            container.innerHTML = '<p>No live feed available for this camera.</p>';
+        } else if (videoSrc.includes('youtube.com') || videoSrc.includes('youtu.be')) {
+            container.innerHTML = `
+        <iframe src="${videoSrc}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      `;
+        } else {
+            container.innerHTML = `
+        <video src="${videoSrc}" controls autoplay muted></video>
+      `;
+        }
+
+        // Dark mode toggle script
+        const modeToggle = document.getElementById('modeToggle');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+
+        function updateModeIcons() {
+            const isDark = document.body.classList.contains('dark');
+            moonIcon.style.display = isDark ? 'none' : 'inline';
+            sunIcon.style.display = isDark ? 'inline' : 'none';
+        }
+
+        modeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            updateModeIcons();
+            // Optional: persist mode
+            localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+        });
+
+        // On load — restore persisted mode
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark');
+        }
+        updateModeIcons();
+    </script>
+    <script src="common.js"></script>
+</body>
+
+</html>

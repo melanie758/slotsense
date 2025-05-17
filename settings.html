@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings - SlotSense</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <header>
+        <div class="header-branding">
+            <a href="index.html" class="logo-link">
+                <img src="images/school-logo.png" alt="School Logo" class="school-logo">
+            </a>
+            <h1 onclick="window.location.href='index.html'">SlotSense Smart Parking System</h1>
+        </div>
+        <nav>
+            <a href="index.html">Nearby (Map)</a>
+            <a href="live.html">Live Cameras</a>
+            <a href="lot.html">Parking Lots</a>
+            <a href="about.html">About</a>
+            <a href="settings.html" class="active">⚙️</a>
+
+            <div class="mode-toggle-wrapper">
+                <button id="modeToggle" title="Toggle Dark Mode">
+                    <span id="moonIcon">🌙</span>
+                    <span id="sunIcon" style="display: none;">☀️</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="main-card">
+        <h2 class="section-title">Settings</h2>
+
+        <div class="settings-grid">
+            <!-- Appearance Section -->
+            <div class="settings-category">
+                <h3>Appearance</h3>
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Dark Mode</strong>
+                        <span class="setting-description">Switch between light and dark theme</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Accent Color</strong>
+                        <span class="setting-description">Choose your preferred color scheme</span>
+                    </div>
+                    <select id="themeColor" class="settings-select">
+                        <option value="blue">Default</option>
+                        <option value="green">Hualien</option>
+                        <option value="purple">Purple</option>
+                        <option value="pink">Princess</option>
+                        <option value="royal">Royal</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Parking Preferences Section -->
+            <div class="settings-category">
+                <h3>Parking Preferences</h3>
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Auto-open Nearest Lot</strong>
+                        <span class="setting-description">Automatically show nearest available parking</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="autoOpenToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Preferred Parking Lot</strong>
+                        <span class="setting-description">Your default parking location</span>
+                    </div>
+                    <select id="preferredLot" class="settings-select">
+                        <option value="any">Any Available</option>
+                        <option value="dorm1">Dormitory 1</option>
+                        <option value="dorm2">Dormitory 2</option>
+                        <option value="admin">Administration</option>
+                        <option value="csie">CSIE Parking Lot</option>
+                        <option value="zhixue">Zhixue Entrance</option>
+                        <option value="eastside">Eastside Community</option>
+                    </select>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Distance Unit</strong>
+                        <span class="setting-description">Miles or kilometers</span>
+                    </div>
+                    <select id="distanceUnit" class="settings-select">
+                        <option value="miles">Miles</option>
+                        <option value="kilometers">Kilometers</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="settings-category">
+                <h3>Notifications</h3>
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Enable Notifications</strong>
+                        <span class="setting-description">Get alerts when parking becomes available</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="notificationsToggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Notification Sounds</strong>
+                        <span class="setting-description">Play sound for parking updates</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Notification Range</strong>
+                        <span class="setting-description">Maximum distance for alerts</span>
+                    </div>
+                    <div class="range-container">
+                        <input type="range" id="notificationRange" min="1" max="10" value="5" class="slider-range">
+                        <span id="rangeValue">5 miles</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Section -->
+            <div class="settings-category">
+                <h3>Account</h3>
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Account Status</strong>
+                        <span class="setting-description">Premium Member (Expires: 12/2025)</span>
+                    </div>
+                    <button class="settings-button">Manage</button>
+                </div>
+
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <strong>Log Out</strong>
+                        <span class="setting-description">Sign out of your account</span>
+                    </div>
+                    <button class="settings-button logout">Log Out</button>
+                </div>
+            </div>
+
+            <!-- App Information Section -->
+            <div class="settings-category">
+                <h3>App Information</h3>
+                <div class="app-info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Version:</span>
+                        <span class="info-value">2.1.4 (Build 2105)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Last Updated:</span>
+                        <span class="info-value">May 15, 2025</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Database Status:</span>
+                        <span class="info-value status-active">Connected</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Last Sync:</span>
+                        <span class="info-value">Today, 10:42 AM</span>
+                    </div>
+                </div>
+
+                <div class="setting-row actions">
+                    <button class="settings-button" id="checkUpdates">Check for Updates</button>
+                    <button class="settings-button secondary" id="clearCache">Clear Cache</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="legal-section">
+            <p><a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a> | <a href="#">Data Usage</a></p>
+            <p class="copyright">© 2025 SlotSense Inc. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const modeToggle = document.getElementById('modeToggle');
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+
+        // Initialize from localStorage or system preference
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let darkMode = localStorage.getItem('darkMode');
+
+        if (darkMode === null) {
+            darkMode = systemPrefersDark;
+        } else {
+            darkMode = darkMode === 'true';
+        }
+
+        updateDarkMode(darkMode);
+
+        // Toggle from header button
+        modeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            updateDarkMode(darkMode);
+            localStorage.setItem('darkMode', darkMode);
+            darkModeToggle.checked = darkMode;
+        });
+
+        // Toggle from settings switch
+        darkModeToggle.addEventListener('change', () => {
+            darkMode = darkModeToggle.checked;
+            updateDarkMode(darkMode);
+            localStorage.setItem('darkMode', darkMode);
+        });
+
+        function updateDarkMode(isDark) {
+            document.body.classList.toggle('dark', isDark);
+            moonIcon.style.display = isDark ? 'none' : 'inline';
+            sunIcon.style.display = isDark ? 'inline' : 'none';
+            darkModeToggle.checked = isDark;
+        }
+
+        // Accent Color Functionality
+        const themeColor = document.getElementById('themeColor');
+
+        // Load saved accent color
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedColor = localStorage.getItem('themeColor') || 'blue';
+            themeColor.value = savedColor;
+            applyAccentColor(savedColor);
+        });
+
+        // Change accent color
+        themeColor.addEventListener('change', () => {
+            const color = themeColor.value;
+            localStorage.setItem('themeColor', color);
+            applyAccentColor(color);
+        });
+
+        function applyAccentColor(color) {
+            document.documentElement.style.setProperty('--primary-color', `var(--${color})`);
+        }
+
+        // Parking Preferences Functionality
+        const autoOpenToggle = document.getElementById('autoOpenToggle');
+        const preferredLot = document.getElementById('preferredLot');
+        const distanceUnit = document.getElementById('distanceUnit');
+        const rangeSlider = document.getElementById('notificationRange');
+        const rangeValue = document.getElementById('rangeValue');
+
+        // Load saved parking preferences
+        document.addEventListener('DOMContentLoaded', () => {
+            // Auto-open setting
+            if (localStorage.getItem('autoOpen') === 'enabled') {
+                autoOpenToggle.checked = true;
+            }
+
+            // Preferred lot
+            const savedLot = localStorage.getItem('preferredLot');
+            if (savedLot) {
+                preferredLot.value = savedLot;
+            }
+
+            // Distance unit
+            const savedUnit = localStorage.getItem('distanceUnit');
+            if (savedUnit) {
+                distanceUnit.value = savedUnit;
+            }
+
+            // Notification range
+            const savedRange = localStorage.getItem('notificationRange');
+            if (savedRange) {
+                rangeSlider.value = savedRange;
+                rangeValue.textContent = `${savedRange} ${distanceUnit.value === 'kilometers' ? 'km' : 'miles'}`;
+            }
+        });
+
+        // Save settings when changed
+        autoOpenToggle.addEventListener('change', () => {
+            localStorage.setItem('autoOpen', autoOpenToggle.checked ? 'enabled' : 'disabled');
+
+            // Show confirmation if enabling
+            if (autoOpenToggle.checked) {
+                alert('Auto-open enabled. The nearest available parking lot will automatically display when you open the app.');
+            }
+        });
+
+        preferredLot.addEventListener('change', () => {
+            localStorage.setItem('preferredLot', preferredLot.value);
+
+            if (preferredLot.value !== 'any') {
+                alert(`Preferred lot set to: ${preferredLot.options[preferredLot.selectedIndex].text}`);
+            }
+        });
+
+        distanceUnit.addEventListener('change', () => {
+            localStorage.setItem('distanceUnit', distanceUnit.value);
+
+            // Update range display if needed
+            if (rangeSlider.value) {
+                rangeValue.textContent = `${rangeSlider.value} ${distanceUnit.value === 'kilometers' ? 'km' : 'miles'}`;
+            }
+
+            // In a real app, you would also update all distance displays
+            alert(`Distance units changed to ${distanceUnit.value}`);
+        });
+
+        rangeSlider.addEventListener('input', () => {
+            const unit = distanceUnit.value === 'kilometers' ? 'km' : 'miles';
+            rangeValue.textContent = `${rangeSlider.value} ${unit}`;
+            localStorage.setItem('notificationRange', rangeSlider.value);
+        });
+
+        // Button actions
+        document.getElementById('checkUpdates').addEventListener('click', () => {
+            alert('Checking for updates...\nYour app is up to date!');
+        });
+
+        document.getElementById('clearCache').addEventListener('click', () => {
+            if (confirm('Clear all cached data? This will not affect your account settings.')) {
+                localStorage.removeItem('cacheTimestamp');
+                alert('Cache cleared successfully.');
+            }
+        });
+    </script>
+</body>
+
+</html>
